@@ -1,0 +1,1 @@
+export const MAGENTA = '#9e0b66';

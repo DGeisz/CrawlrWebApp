@@ -1,0 +1,14 @@
+.userContainer {
+    display: -webkit-flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.yourLocations {
+    width: 800px;
+    /*margin: 50px;*/
+    font-size: 30pt;
+    color: #9e0b66;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}

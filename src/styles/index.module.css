@@ -1,0 +1,59 @@
+.loginContainer {
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    /*border: 1px solid grey;*/
+    border-radius: 2px;
+    box-shadow: grey 2px 0 10px;
+}
+
+.signInContainer {
+    width: 400px;
+    height: 400px;
+    margin: 20px 0 20px 0;
+    background-color: red;
+}
+
+.signInTitle {
+    color: aqua;
+    font-size: 30pt;
+}
+
+.appSignIn {
+    height: 100px;
+    background-color: blue;
+}
+
+.orContainer {
+    height: 50px;
+    width: 100%;
+    flex-direction: row;
+}
+
+.orBar {
+    height: 50%;
+    flex: 1;
+    border-bottom: 1px solid black;
+}
+
+.or {
+    font-size: 40pt;
+}
+
+.standardSignIn {
+    height: 20px;
+    background-color: orange;
+}
+
+.signUpContainer {
+    height: 50px;
+    width: 100%;
+    background-color: yellow;
+}
+
+.titleContainer {
+    margin-top: 20px;
+    text-align: center;
+    color: red;
+    font-size: 20pt;
+}

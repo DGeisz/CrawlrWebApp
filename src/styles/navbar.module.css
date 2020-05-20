@@ -1,0 +1,34 @@
+.navLink {
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        color: #9e0b66;
+        font-size: 14pt;
+        display: -webkit-flex;
+        flex-direction: row;
+        align-items: center;
+}
+
+.navLink:hover {
+    color: rgba(158, 11, 102, 0.6);
+    text-decoration: none;
+}
+
+.navLink:active {
+    color: #d60d89;
+    text-decoration: none;
+}
+
+.navDropOption {
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    color: #9e0b66;
+    font-size: 14pt;
+    display: -webkit-flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.dropItem:active {
+    background-color: #d60d89;
+}
