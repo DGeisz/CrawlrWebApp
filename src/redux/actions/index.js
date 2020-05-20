@@ -9,5 +9,7 @@ export const test2 = () => {
 };
 
 export const signOut = () => {
+    console.log("Made it here then orgaon" +
+        "asd;lkjfajsdf");
     return {type: SIGNOUT};
-}
+};

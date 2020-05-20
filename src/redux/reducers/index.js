@@ -9,6 +9,7 @@ const initialState = {
 
 
 const rootReducer = (state = initialState, action) => {
+    console.log("Now we're here")
     switch (action.type) {
         case TEST1:
             console.log(state);
@@ -16,6 +17,7 @@ const rootReducer = (state = initialState, action) => {
         case TEST2:
             return Object.assign({}, state, {val2: state.val2 + 1});
         case SIGNOUT:
+            console.log("Signing out");
             return Object.assign({}, state, {user: null, userID: null});
         default:
             return state;
