@@ -36,7 +36,7 @@ const LoginOrUser = ({user, userID, signOut}) => {
                     {user}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Link href='/user/[uid]' as={`/user/${userID}`}>
+                    <Link href='/user/[uid]/locations' as={`/user/${userID}/locations`}>
                         <Dropdown.Item className={styles.dropItem}>
                             Locations
                         </Dropdown.Item>

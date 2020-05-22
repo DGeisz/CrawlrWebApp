@@ -11,15 +11,13 @@ import Button from "react-bootstrap/Button";
 
 const mapStateToProps = state => {
     return {
-        val1: state.val1,
-        val2: state.val2
+        userID: state.userID
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        test1: () => dispatch(test1()),
-        test2: () => dispatch(test2())
+
     };
 };
 
@@ -30,7 +28,7 @@ class FirstPage extends React.Component {
         return (
             <>
                 <NavBar/>
-                <Container className="rounded border p-5 mt-4 w-50 bg-white">
+                <Container className="rounded border p-5 mt-4 w-25 bg-white" fluid='md'>
                     <Form>
                         <Form.Group controlId="formEmail">
                             <Form.Label>Email address</Form.Label>
@@ -52,6 +50,9 @@ class FirstPage extends React.Component {
                             Submit this bad boi
                         </Button>
                     </Form>
+                    <Link href={'/user/[uid]/locations'} as={`/user/${this.props.userID}/locations`}>
+                        <a>Take me there</a>
+                    </Link>
 
                     {/*<div>*/}
                     {/*    <button onClick={this.props.test1}>Test1</button>*/}
