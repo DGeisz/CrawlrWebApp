@@ -28,7 +28,8 @@ const mapDispatchToProps = dispatch => {
 
 
 const LoginOrUser = ({user, userID, signOut}) => {
-    const router = useRouter();
+    // const router = useRouter();
+
     if (user) {
         return (
             <Dropdown alignRight>
@@ -41,7 +42,7 @@ const LoginOrUser = ({user, userID, signOut}) => {
                             Locations
                         </Dropdown.Item>
                     </Link>
-                    <Link href='/user/[uid]' as={`/user/${userID}`}>
+                    <Link href='/'>
                         <Dropdown.Item className={styles.dropItem}>
                             Account
                         </Dropdown.Item>
@@ -52,7 +53,7 @@ const LoginOrUser = ({user, userID, signOut}) => {
                                 className={styles.dropItem}
                                 onClick={() => {
                                     signOut();
-                                    router.push('/').catch(e => console.log(e));
+                                    // router.push('/').catch(e => console.log(e));
                                 }}>
                             Sign out
                         </Button>
