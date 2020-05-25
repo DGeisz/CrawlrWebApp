@@ -29,6 +29,18 @@
     align-items: center;
 }
 
-.dropItem:active {
-    background-color: #d60d89;
+.dropItem {
+    color: #6b6b6b !important;
 }
+
+.dropItem:active {
+    color: white !important;
+}
+
+.dropItem:active {
+    background-color: #d60d89 !important;
+}
+
+
+
+

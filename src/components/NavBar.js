@@ -9,9 +9,9 @@ import Container from "react-bootstrap/Container";
 import {faBars} from "@fortawesome/free-solid-svg-icons/faBars";
 import {MAGENTA} from "../styles/colorConstants";
 import Dropdown from "react-bootstrap/Dropdown";
-import {signOut, test1} from "../redux/actions";
+import {signOut} from "../redux/actions";
 import Button from "react-bootstrap/Button";
-import {useRouter} from "next/router";
+import Router from "next/router";
 
 const mapStateToProps = state => {
     return {
@@ -37,28 +37,30 @@ const LoginOrUser = ({user, userID, signOut}) => {
                     {user}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Link href='/user/[uid]/locations' as={`/user/${userID}/locations`}>
-                        <Dropdown.Item className={styles.dropItem}>
-                            Locations
-                        </Dropdown.Item>
-                    </Link>
-                    <Link href='/'>
-                        <Dropdown.Item className={styles.dropItem}>
-                            Account
-                        </Dropdown.Item>
-                    </Link>
-                    <Dropdown.Divider/>
-                    <Link href='/user/[uid]' as={`/user/${userID}`}>
-                        <Button as={Dropdown.Item}
-                                className={styles.dropItem}
-                                onClick={() => {
-                                    signOut();
-                                    // router.push('/').catch(e => console.log(e));
-                                }}>
-                            Sign out
-                        </Button>
+                    <Dropdown.Item className={styles.dropItem}
+                                    onClick={() => {
+                                        Router.push('/user/[uid]/', `/user/${userID}/`).catch(e => console.log(e));
+                                    }}
+                    >
+                        Locations
+                    </Dropdown.Item>
+                    <Dropdown.Item className={styles.dropItem}
+                                   onClick={() => {
+                                       Router.push('/user/[uid]/account', `/user/${userID}/account`).catch(e => console.log(e));
+                                   }}
+                    >
+                        Account
+                    </Dropdown.Item>
 
-                    </Link>
+                    <Dropdown.Divider/>
+                    <Button as={Dropdown.Item}
+                            className={styles.dropItem}
+                            onClick={() => {
+                                signOut();
+                                Router.push('/').catch(e => console.log(e));
+                            }}>
+                        Sign out
+                    </Button>
                 </Dropdown.Menu>
             </Dropdown>
         );
@@ -81,6 +83,7 @@ const CrawlrNavBar = ({user, userID, signOut}) => {
                     .navbar-white {
                         background-color: white;
                         box-shadow: #d6d6d6 0 1px 5px;
+                        z-index: 100;
                     }
                 `}
             </style>

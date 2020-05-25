@@ -1,4 +1,4 @@
-import {SIGNOUT, TEST1, TEST2} from "../constants";
+import {SIGNOUT} from "../constants";
 
 const initialState = {
     user: "Danny Boi",
