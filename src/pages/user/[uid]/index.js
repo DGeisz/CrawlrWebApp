@@ -52,6 +52,7 @@ function CrawlrLocations({locations, userID}){
                         background-color: #d60d89;
                         color: white;
                         font-size: 18pt;
+                        box-shadow: gray 0 1px 3px;
                     }
                     
                     .btn-pink:hover {
@@ -94,7 +95,7 @@ function CrawlrLocations({locations, userID}){
                     <Col className='mt-4'>
                         <div style={{height: '300px !important'}} className='d-flex align-items-center justify-content-center rounded bg-white h-100 shadow-sm p-5'>
                             <Button variant="pink">
-                                Claim a new Location!
+                                Claim new location
                             </Button>
                         </div>
                     </Col>

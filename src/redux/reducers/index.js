@@ -21,7 +21,10 @@ const initialState = {
                 week: [0, 0, 0, 0, 0],
                 allTime: [245, 1203, 450, 128, 200]
             },
-            event: "We are having a real life vampire",
+            event: {
+                content: "We are having a real life vampire",
+                expires: 29834239847
+            },
             promotion: {
                 content: "Werewolves get free drinks all night",
                 expires: 123908174234
@@ -44,7 +47,10 @@ const initialState = {
                 week: [45, 344, 33, 4, 2],
                 allTime: [245, 1203, 450, 128, 200]
             },
-            event: "We are having a real life vampire",
+            event: {
+                content: "We are having a real life vampire",
+                expires: 29834239847
+            },
             promotion: {
                 content: "Werewolves get free drinks all night",
                 expires: 123908174234
@@ -67,15 +73,18 @@ const initialState = {
                 week: [45, 344, 33, 4, 2],
                 allTime: [245, 1203, 450, 128, 200]
             },
-            event: "We are having a real life vampire",
+            event: {
+                content: "We are having a real life vampire",
+                expires: 29834239847
+            },
             promotion: {
                 content: "Werewolves get free drinks all night",
                 expires: 123908174234
             }
         },
         {
-            name: "Danny's First location",
-            _id: "aasdfhjasdhfaksjdfh",
+            name: "Danny's Goober location",
+            _id: "aasdfdfaksjdfh",
             type: "Bar",
             additionalInfo: {
                 description: "A super fun bar filled with fun-loving folks",
@@ -90,7 +99,10 @@ const initialState = {
                 week: [45, 344, 33, 4, 2],
                 allTime: [245, 1203, 450, 128, 200]
             },
-            event: "We are having a real life vampire",
+            event: {
+                content: "We are having a real life vampire",
+                expires: 29834239847
+            },
             promotion: {
                 content: "Werewolves get free drinks all night",
                 expires: 123908174234

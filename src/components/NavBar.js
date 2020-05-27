@@ -82,20 +82,20 @@ const CrawlrNavBar = ({user, userID, signOut}) => {
                 {`
                     .navbar-white {
                         background-color: white;
-                        box-shadow: #d6d6d6 0 1px 5px;
                         z-index: 100;
+                        padding: 0;
                     }
                 `}
             </style>
-            <Navbar expand="sm" variant="white">
-                <Container fluid className={"mx-md-3"}>
+            <Navbar expand="sm" variant="white" className='fixed-top shadow-sm'>
+                <Container fluid>
                     <Navbar.Brand>
                         <Link href="/">
                             <a>
                                 <img src="/logo.PNG"
                                      alt="logo"
-                                     height="70"
-                                     width="70"
+                                     height="60"
+                                     width="60"
                                 />
                             </a>
                         </Link>
@@ -105,8 +105,8 @@ const CrawlrNavBar = ({user, userID, signOut}) => {
                     </Navbar.Toggle>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto" variant={"magenta"}>
-                            <Nav.Item className="mr-4">
-                                <Link href="/pricing" className={styles.navLink}>
+                            <Nav.Item className={`mr-4 mb-2 ${styles.navLink}`}>
+                                <Link href="/pricing">
                                     <a className={styles.navLink}>Pricing</a>
                                 </Link>
                             </Nav.Item>
@@ -115,6 +115,7 @@ const CrawlrNavBar = ({user, userID, signOut}) => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
+            <div style={{height: 70}}/>
         </>
     );
 };

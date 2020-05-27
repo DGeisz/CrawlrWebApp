@@ -1,0 +1,128 @@
+.locationTitle {
+    color: #9e0b66;
+}
+
+.sideOptionsList {
+    color: #4a4a4a;
+    font-weight: 600;
+    list-style-type: none !important;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.sideOption {
+    padding: 8px 8px 8px 12px;
+    border-radius: 10px;
+    transition: background-color 0.2s;
+}
+
+.sideOption:hover {
+    background-color: #ebebeb;
+}
+
+.sideOption:active {
+    background-color: #cccccc;
+}
+
+.infoHeader {
+    font-size: 10pt;
+    color: #cccccc;
+}
+
+.infoContent {
+    font-size: 15pt;
+    font-weight: 600;
+    color:  #4a4a4a;
+}
+
+.moreInfo {
+    font-weight: 600;
+    /*display: block;*/
+    color: #878787;
+    /*padding: 10px;*/
+    padding: 5px 15px 5px 15px;
+    border-radius: 20px;
+    transition: background-color 0.2s;
+}
+
+.moreInfo:hover {
+    background-color: #ebebeb;
+}
+
+.moreInfo:active {
+    background-color: #cccccc;
+}
+
+.promoContainer {
+    background-color: #e9f7e9;
+}
+
+.promoTitle {
+    color: #048c4f;
+}
+
+.promoHeader {
+    font-size: 10pt;
+    color: #04b364;
+}
+
+.promoContent {
+    font-size: 15pt;
+    font-weight: 600;
+    color: #025c33;
+}
+
+.promoInfo {
+    font-weight: 600;
+    /*display: block;*/
+    color: #548f74;
+    /*padding: 10px;*/
+    padding: 5px 15px 5px 15px;
+    border-radius: 20px;
+    transition: background-color 0.2s;
+}
+
+.promoInfo:hover {
+    background-color: #d8e6d8;
+}
+
+.promoInfo:active {
+    background-color: #bcccbc;
+}
+
+.eventContainer {
+    background-color: #def4fc;
+}
+
+.eventTitle {
+    color: #146fc9;
+}
+
+.eventHeader {
+    font-size: 10pt;
+    color: #258ef7;
+}
+
+.eventContent {
+    font-size: 15pt;
+    font-weight: 600;
+    color: #0a4782;
+}
+
+.eventInfo {
+    font-weight: 600;
+    /*display: block;*/
+    color: #3c99ba;
+    /*padding: 10px;*/
+    padding: 5px 15px 5px 15px;
+    border-radius: 20px;
+    transition: background-color 0.2s;
+}
+
+.eventInfo:hover {
+    background-color: #cce4ed;
+}
+
+.eventInfo:active {
+    background-color: #b4cfd9;
+}
