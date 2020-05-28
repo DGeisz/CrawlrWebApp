@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styles from '../../../../../styles/locations.module.css'
 import Container from "react-bootstrap/Container";
 import {useRouter} from 'next/router';
@@ -6,6 +6,11 @@ import NavBar from "../../../../../components/NavBar";
 import {connect} from 'react-redux';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import {emojiArray, emojiNames, smallEmojiSize, smallEmojiStyle} from "../../../../../app-constants/emojis";
+import {toRep} from "../../../../../utils/miscFunctions";
+
+const barGraphHeight = 400;
+const timeFrameOptions = ['Live', 'Day', 'Week', 'All Time'];
 
 const mapStateToProps = state => {
     return {
@@ -16,14 +21,52 @@ const mapStateToProps = state => {
 
 const CrawlrLoc = ({locations}) => {
 
+    const [graphTime, setGraphTime] = useState(0);
+
+    const messageRef = useRef();
+
     const router = useRouter();
     const {locid} = router.query;
     const loc = locations.find(location => location._id === locid);
     console.log("Loc:", loc.name);
 
+    let activeArray;
+    switch (graphTime) {
+        case 0:
+            activeArray = loc.emojiCount.live;
+            break;
+        case 1:
+            activeArray = loc.emojiCount.day;
+            break;
+        case 2:
+            activeArray = loc.emojiCount.week;
+            break;
+        case 3:
+            activeArray = loc.emojiCount.allTime;
+            break;
+        default:
+            activeArray = loc.emojiCount.live;
+    }
+
+    const maxVote = Math.max(...activeArray);
+
+    const scrollToBottomMessages = () => {
+        messageRef.current.scrollIntoView();
+    };
+
+    useEffect(() => {
+        scrollToBottomMessages();
+    });
+
     return (
         <>
             <NavBar/>
+            {/*<div style={{display: "flex", flexDirection: 'row', border: '5px solid black'}}>*/}
+            {/*    {emojiArray.map((emoji, index) => {*/}
+            {/*        return <img height={smallEmojiSize[index]} src={emoji} alt='emoji' style={smallEmojiStyle[index]}/>*/}
+            {/*    })}*/}
+            {/*</div>*/}
+
             <Container fluid className="h-100 min-vh-100">
                 <Row className="h-100 min-vh-100">
                     {/*This is the side bar for large/xl screens*/}
@@ -111,13 +154,82 @@ const CrawlrLoc = ({locations}) => {
                             </Row>
                             <Row>
                                 <Col>
-                                    <div style={{height: 500, 'background-color': 'pink'}}>
-                                        
+                                    <div style={{height: 500}}
+                                         className='d-flex flex-column justify-content-center align-items-center'>
+                                        <div className={styles.timeFrameContainer}>
+                                            {timeFrameOptions.map((time, index) => {
+                                                if (index === graphTime) {
+                                                    return (
+                                                        <div className={styles.timeFrameOptionContainer}>
+                                                            <div className={styles.timeFrameOptionActive}>
+                                                                {time}
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                }
+                                                return (
+                                                    <div className={styles.timeFrameOptionContainer}>
+                                                        <div className={styles.timeFrameOption}
+                                                             onClick={() => {
+                                                                 console.log("Hi There!!")
+                                                                 setGraphTime(index);
+                                                             }}>
+                                                            {time}
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                        <div className={styles.barGraph} style={{height: barGraphHeight}}>
+                                            <div className={styles.barGraphTopTick} style={{height: barGraphHeight}}/>
+                                            {emojiNames.map((emoji, index) => {
+                                                let height = (activeArray[index] / maxVote) * (barGraphHeight - 50);
+                                                if (activeArray[index] === 0) {
+                                                    height = 0;
+                                                }
+                                                return (
+                                                    <div className={styles.barContainer}
+                                                         style={{height: barGraphHeight}}>
+                                                        <p className={styles.barNumber}>{toRep(activeArray[index])}</p>
+                                                        <div className={`${styles.bar} rounded-top`} style={{height: height}}/>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                        <div className={styles.labelContainer}>
+                                            {emojiArray.map((emoji, index) => {
+                                                return (
+                                                    <div className={styles.emojiContainer}>
+                                                        <img height={smallEmojiSize[index]}
+                                                             src={emoji} alt={"emoji" + index}
+                                                             style={smallEmojiStyle[index]}
+                                                        />
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
                                     </div>
                                 </Col>
                                 <Col>
-                                    <div style={{height: 500, 'background-color': 'blue'}}/>
+                                    <div className={styles.messagesContainer}>
+                                        <ul>
+                                            <li>Link 1</li>
+                                            <li>Link 2</li>
+                                            <li>Link 3</li>
+                                            <li>Link 4</li>
+                                            <li>Link 5</li>
+                                            <li>Link 6</li>
+                                            <li>Link 7</li>
+                                            <li>Link 8</li>
+                                            <li>Link 9</li>
+                                            <li>Link 10</li>
+                                            <li>Link 11</li>
+                                            <li>Link 13</li>
+                                            <li>Link 13</li>
+                                        </ul>
+                                        <div ref={messageRef}/>
 
+                                    </div>
                                 </Col>
                             </Row>
                         </Container>
