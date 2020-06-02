@@ -1,0 +1,91 @@
+.messageContainer {
+    /*padding: 20px 10px 20px 10px;*/
+    padding: 0 10px 0 10px;
+    margin: 10px 0 10px 0;
+    list-style-type: none;
+}
+
+.messageTopper {
+    display: -webkit-flex;
+    flex-direction: row;
+    align-items: flex-end;
+    /*background-color: #d60d89;*/
+    /*justify-content: flex-end;*/
+}
+
+.messageContent {
+    padding: 25px;
+}
+
+.messageUser {
+    margin-bottom: 0;
+    font-weight: bold;
+    color: #9e0b66;
+}
+
+.messageTime {
+    margin: 0 10px 0 10px;
+    font-weight: bold;
+    font-size: 10pt;
+    color:  #cccccc;
+}
+
+.voteContainer {
+    flex: 1;
+    display: -webkit-flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+    margin-bottom: 1px;
+}
+
+.upVoteCount {
+    margin: 0 3px 0 3px;
+    color: #c9c9c9;
+}
+
+.upIcon {
+    color: #c9c9c9;
+    border-radius: 5px;
+    margin: 0 3px 0 3px;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.upIcon:hover {
+    color: #6f966f;
+    background-color: #cccccc;
+}
+
+
+.downFlagIcon {
+    color: #c9c9c9;
+    border-radius: 5px;
+    margin: 0 3px 0 3px;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.downFlagIcon:hover {
+    color: #b36d6d;
+    background-color: #cccccc;
+}
+
+.locNameContainer {
+    display: -webkit-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.locationText {
+    font-weight: bold;
+    color: #ff9494;
+}
+
+.ownerText {
+    font-weight: bold;
+    color: #149cdb;
+    margin-left: 4px;
+}
+
+.locArrow {
+    margin: 0 5px 0 5px;
+    color: #c9c9c9;
+}

@@ -243,15 +243,63 @@
     height: 450px;
     overflow: hidden;
     overflow-y: scroll;
+    background-color: white;
+    -webkit-border-top-left-radius: 20px;
 }
 
-.messagesContainer li {
-    padding: 20px;
-    background-color: #d60d89;
-    border-radius: 10px;
-    margin: 20px;
-    list-style-type: none;
+.inputForm {
+    display: -webkit-flex;
+    align-items: center;
+    flex-direction: row;
 }
+
+
+.inputContainer {
+    padding: 10px;
+    background-color: #e02d56;
+    -webkit-border-bottom-left-radius: 20px;
+    -webkit-border-bottom-right-radius: 20px;
+}
+
+.inputFormGroup {
+    width: 100%;
+    display: -webkit-flex;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.input {
+    /*flex: 1 !important;*/
+    margin-top: 15px !important;
+    margin-right: 10px;
+    align-self: center !important;
+    width: 100% !important;
+    background-color: #ff9494 !important;
+    color: black !important;
+    border: 0 solid #ff9494 !important;
+}
+
+.infoFieldHeader {
+    display: -webkit-flex;
+    flex-direction: row;
+}
+
+.infoFieldTopLeft {
+    flex: 1;
+    justify-content: flex-start;
+}
+
+.infoFieldTopRight {
+    flex: 1;
+    justify-content: flex-end;
+}
+/*.messagesContainer li {*/
+/*    padding: 20px;*/
+/*    background-color: #d60d89;*/
+/*    border-radius: 10px;*/
+/*    margin: 20px;*/
+/*    list-style-type: none;*/
+/*}*/
 
 /*border: '1px solid black'*/
 
