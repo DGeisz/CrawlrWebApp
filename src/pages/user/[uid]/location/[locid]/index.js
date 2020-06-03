@@ -97,8 +97,8 @@ const CrawlrLoc = ({locations}) => {
                             <h3 className={styles.infoHeader}>Description</h3>
                             <p className={styles.infoContent}>{loc.additionalInfo.description}</p>
                             <hr/>
-                            <h3 className={styles.infoHeader}>Hours</h3>
-                            <p className={styles.infoContent}>{loc.additionalInfo.hours}</p>
+                            {/*<h3 className={styles.infoHeader}>Hours</h3>*/}
+                            {/*<p className={styles.infoContent}>{loc.additionalInfo.hours}</p>*/}
                             <div className='d-flex justify-content-center align-items-center'>
                                 {/*<div className='bg-danger' style={{height: 20, width: 20}}/>*/}
                                 <p className={styles.moreInfo}>More Information</p>

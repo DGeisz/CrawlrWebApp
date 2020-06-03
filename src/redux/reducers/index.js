@@ -13,7 +13,35 @@ const initialState = {
                 phone: "234-123-3212",
                 website: "www.firstloc.com",
                 address: "234 LaClede Way, Norman, OK, 20303",
-                hours: "5:00AM - 12:00AM"
+                hours: [
+                    {
+                        days: ['Mon', 'Tue', 'Wed'],
+                        hours: [
+                            {
+                                from: '9:00 AM',
+                                to: '12:00 PM'
+                            },
+                            {
+                                from: '2:00 PM',
+                                to: '5:00 PM'
+                            }
+                        ]
+                    },
+                    {
+                        days: ['Thu', 'Fri', 'Say'],
+                        hours: [
+                            {
+                                from: '7:00 AM',
+                                to: '10:00 AM'
+                            },
+                            {
+                                from: '1:00 PM',
+                                to: '9:00 PM'
+                            }
+                        ]
+                    }
+                ]
+
             },
             emojiCount: {
                 live: [0, 0, 0, 0, 0],
@@ -39,7 +67,34 @@ const initialState = {
                 phone: "234-123-3212",
                 website: "www.firstloc.com",
                 address: "234 LaClede Way, Norman, OK, 20303",
-                hours: "5:00AM - 12:00AM"
+                hours: [
+                    {
+                        days: ['Mon', 'Tue', 'Wed'],
+                        hours: [
+                            {
+                                from: '9:00 AM',
+                                to: '12:00 PM'
+                            },
+                            {
+                                from: '2:00 PM',
+                                to: '5:00 PM'
+                            }
+                        ]
+                    },
+                    {
+                        days: ['Thu', 'Fri', 'Say'],
+                        hours: [
+                            {
+                                from: '7:00 AM',
+                                to: '10:00 AM'
+                            },
+                            {
+                                from: '1:00 PM',
+                                to: '9:00 PM'
+                            }
+                        ]
+                    }
+                ]
             },
             emojiCount: {
                 live: [0, 0, 0, 0, 0],
@@ -65,7 +120,34 @@ const initialState = {
                 phone: "234-123-3212",
                 website: "www.firstloc.com",
                 address: "234 LaClede Way, Norman, OK, 20303",
-                hours: "5:00AM - 12:00AM"
+                hours: [
+                    {
+                        days: ['Mon', 'Tue', 'Wed'],
+                        hours: [
+                            {
+                                from: '9:00 AM',
+                                to: '12:00 PM'
+                            },
+                            {
+                                from: '2:00 PM',
+                                to: '5:00 PM'
+                            }
+                        ]
+                    },
+                    {
+                        days: ['Thu', 'Fri', 'Say'],
+                        hours: [
+                            {
+                                from: '7:00 AM',
+                                to: '10:00 AM'
+                            },
+                            {
+                                from: '1:00 PM',
+                                to: '9:00 PM'
+                            }
+                        ]
+                    }
+                ]
             },
             emojiCount: {
                 live: [0, 0, 0, 0, 0],
@@ -91,7 +173,34 @@ const initialState = {
                 phone: "234-123-3212",
                 website: "www.firstloc.com",
                 address: "234 LaClede Way, Norman, OK, 20303",
-                hours: "5:00AM - 12:00AM"
+                hours: [
+                    {
+                        days: ['Mon', 'Tue', 'Wed'],
+                        hours: [
+                            {
+                                from: '9:00 AM',
+                                to: '12:00 PM'
+                            },
+                            {
+                                from: '2:00 PM',
+                                to: '5:00 PM'
+                            }
+                        ]
+                    },
+                    {
+                        days: ['Thu', 'Fri', 'Say'],
+                        hours: [
+                            {
+                                from: '7:00 AM',
+                                to: '10:00 AM'
+                            },
+                            {
+                                from: '1:00 PM',
+                                to: '9:00 PM'
+                            }
+                        ]
+                    }
+                ]
             },
             emojiCount: {
                 live: [2, 4, 6, 0, 1],

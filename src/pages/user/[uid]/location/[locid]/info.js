@@ -10,7 +10,9 @@ const locNameMaxLength = 40;
 const locTypeMaxLength = 15;
 const locDescMaxLength = 140;
 
-const types = ['Bar', 'Club', 'House', 'Food', 'Coffee & Tea'];
+const types = ['Bar', 'Club', 'House', 'Food', 'Coffee & Tea', 'Dessert'];
+
+const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 
 const mapStateToProps = state => {
@@ -18,6 +20,19 @@ const mapStateToProps = state => {
         locations: state.locations
     }
 };
+
+
+/**
+ * Helper function that let's me know if a day has been taken in
+ * a set of hours*/
+function dayTaken(hours, day) {
+    for (let i = 0; i < hours.length; i++){
+        if (hours[i].days.includes(day)){
+            return true;
+        }
+    }
+    return false;
+}
 
 class CrawlrLocInfo extends React.Component{
 
@@ -36,6 +51,8 @@ class CrawlrLocInfo extends React.Component{
             editWebsite: false,
             phone: this.loc.additionalInfo.phone,
             editPhone: false,
+            hours: this.loc.additionalInfo.hours,
+            editHours: false,
         }
     }
 
@@ -112,18 +129,20 @@ class CrawlrLocInfo extends React.Component{
         }
     };
 
+    takeDay = (hourIndex, day) => {
+        let hoursCopy = this.state.hours.slice();
+        hoursCopy[hourIndex].days.push(day);
+        this.setState({hours: hoursCopy});
+    };
 
-
-
-
-    // const router = useRouter();
-    // const {locid} = router.query;
-    //
-    // const loc = locations.find(loc => loc._id === locid);
-
+    removeDay = (hourIndex, day) => {
+        let hoursCopy = this.state.hours.slice();
+        const dayIndex = hoursCopy[hourIndex].days.indexOf(day);
+        hoursCopy[hourIndex].days.splice(dayIndex, 1);
+        this.setState({hours: hoursCopy});
+    };
+    
     render() {
-
-
         return (
             <>
                 <NavBar/>
@@ -191,7 +210,7 @@ class CrawlrLocInfo extends React.Component{
                                 {this.state.editType ?
                                     <>
                                         <h3 className={styles.editInfoHeader}>Select your location's type:</h3>
-                                        <div className={styles.infoFieldHeader}>
+                                        <div className={styles.flexRowWrap}>
                                             {types.map(type => {
                                                 return (
                                                     <div className={styles.typeOption}
@@ -229,7 +248,7 @@ class CrawlrLocInfo extends React.Component{
                                 }
                                 <hr/>
 
-
+                                {/*Description*/}
                                 <div className={styles.infoFieldHeader}>
                                     <div className={styles.infoFieldTopLeft}>
                                         <h2 className='mb-4'>Description</h2>
@@ -268,6 +287,90 @@ class CrawlrLocInfo extends React.Component{
                                         <p className={styles.infoContent}>{this.state.description}</p> :
                                         <p className={styles.emptyContent}>No Description</p>}</>
                                 }
+                                <hr/>
+
+                                {/*Hours*/}
+                                <div className={styles.infoFieldHeader}>
+                                    <div className={styles.infoFieldTopLeft}>
+                                        <h2 className='mb-4'>Hours</h2>
+                                    </div>
+                                    <div>
+                                        {
+                                            !this.state.editHours ?
+                                                <h2 className={styles.editInfoField}
+                                                    onClick={() => this.setState({editHours: true})}>
+                                                    Edit
+                                                </h2> : null
+                                        }
+                                    </div>
+                                </div>
+
+                                {this.state.hours.map((hour, hourIndex) => {
+                                    return (
+                                        <div className={styles.flexRowWrap}>
+                                            {days.map((day, index) => {
+                                                if (hour.days.includes(day)) { //Day active
+                                                    return (
+                                                        <div className={styles.activeDayButton}
+                                                          onClick={() => this.removeDay(hourIndex, day)}>
+                                                            {day}
+                                                        </div>
+                                                    );
+                                                } else if (dayTaken(this.state.hours, day)) { //Day is taken
+                                                    return (
+                                                        <div className={styles.takenDayButton}>
+                                                            {day}
+                                                        </div>
+                                                    );
+                                                } else { //day is vacant
+                                                    return (
+                                                        <div className={styles.vacantDayButton}
+                                                             onClick={() => this.takeDay(hourIndex, day)}>
+                                                            {day}
+                                                        </div>
+                                                    );
+                                                }
+                                            })}
+                                        </div>
+                                    );
+                                })}
+
+                                {/*<div className={styles.flexRowWrap}>*/}
+                                {/*    {days.map((day, index) => {*/}
+                                {/*        if (false) { //Day active*/}
+                                {/*            return <div className={styles.activeDayButton}>{day}</div>;*/}
+                                {/*        } else if (false) { //Day is vacant*/}
+                                {/*            return <div className={styles.vacantDayButton}>{day}</div>;*/}
+                                {/*        } else { //day is taken*/}
+                                {/*            return <div className={styles.takenDayButton}>{day}</div>;*/}
+                                {/*        }*/}
+                                {/*    })}*/}
+                                {/*</div>*/}
+
+                                {/*{this.state.editHours ?*/}
+                                {/*    <Form onSubmit={e => e.preventDefault()}>*/}
+                                {/*        <Form.Group controlId="editHours">*/}
+                                {/*            <Form.Control type="hours"*/}
+                                {/*                          as="textarea"*/}
+                                {/*                          placeholder="Enter location hours..."*/}
+                                {/*                          value={this.state.hours}*/}
+                                {/*                          onChange={e => this.setState({hours: e.target.value.slice(0, locDescMaxLength)})}*/}
+                                {/*            />*/}
+                                {/*            <Form.Text>{`Characters Remaining: ${locDescMaxLength - this.state.hours.length}`}</Form.Text>*/}
+                                {/*            <div className={styles.formButtons}>*/}
+                                {/*                <div className={styles.cancel} onClick={this.hoursCancel}>*/}
+                                {/*                    Cancel*/}
+                                {/*                </div>*/}
+                                {/*                <div className={styles.save} onClick={this.hoursSave}>*/}
+                                {/*                    Save*/}
+                                {/*                </div>*/}
+                                {/*            </div>*/}
+                                {/*        </Form.Group>*/}
+                                {/*    </Form>*/}
+                                {/*    : <>{this.state.hours ?*/}
+                                {/*        <p className={styles.infoContent}>{this.state.hours}</p> :*/}
+                                {/*        <p className={styles.emptyContent}>No Hours</p>}</>*/}
+                                {/*}*/}
                                 <hr/>
 
 

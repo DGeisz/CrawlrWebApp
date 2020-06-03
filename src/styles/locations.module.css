@@ -371,9 +371,59 @@
     font-weight: 600;
     border-radius: 5px;
     margin-right: 10px;
-    transition: background-color 0.2s;
+    margin-bottom: 10px;
+    transition: background-color 0.2s, padding 0.2s;
+}
+
+.flexRowWrap {
+    display: -webkit-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .typeOption:hover {
     background-color: #9e0b66;
+}
+
+.typeOption:active {
+    padding: 4px 9px 4px 9px;
+}
+
+.activeDayButton {
+    padding: 5px 10px 5px 10px;
+    background-color: #d60d89;
+    color: white;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s;
+}
+
+.activeDayButton:hover {
+    background-color: #9e0b66;
+}
+
+.vacantDayButton {
+    padding: 5px 10px 5px 10px;
+    background-color: #ebebeb;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s;
+}
+
+.vacantDayButton:hover {
+    background-color: #cccccc;
+}
+
+.takenDayButton {
+    padding: 5px 10px 5px 10px;
+    background-color: #ebebeb;
+    color: #cccccc;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
