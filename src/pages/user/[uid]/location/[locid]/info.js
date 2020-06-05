@@ -5,6 +5,9 @@ import LocationNavigation from "../../../../../components/LocationNavigation";
 import styles from "../../../../../styles/locations.module.css";
 import {connect} from 'react-redux'
 import {Form} from "react-bootstrap";
+import Icon from "@mdi/react";
+import {mdiPlus} from "@mdi/js";
+import {dayArrayToInternal, militaryBlockToStandardInterval} from "../../../../../helper_functions/generalFunctions";
 
 const locNameMaxLength = 40;
 const locTypeMaxLength = 15;
@@ -13,6 +16,7 @@ const locDescMaxLength = 140;
 const types = ['Bar', 'Club', 'House', 'Food', 'Coffee & Tea', 'Dessert'];
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 
 
 const mapStateToProps = state => {
@@ -53,6 +57,7 @@ class CrawlrLocInfo extends React.Component{
             editPhone: false,
             hours: this.loc.additionalInfo.hours,
             editHours: false,
+            exTime: ''
         }
     }
 
@@ -112,7 +117,6 @@ class CrawlrLocInfo extends React.Component{
 
     phoneInput = e => {
         const onlyNumbers = e.target.value.replace(/\D/g, '');
-        console.log(e.target.value, onlyNumbers);
         if (onlyNumbers !== ''){
             let finalPhone;
             if (onlyNumbers.length > 3) {
@@ -141,7 +145,89 @@ class CrawlrLocInfo extends React.Component{
         hoursCopy[hourIndex].days.splice(dayIndex, 1);
         this.setState({hours: hoursCopy});
     };
-    
+
+    setHours = (time, hourIndex, from = true, split) => {
+        let hoursCopy = this.state.hours.slice();
+        let fromTo;
+        if (from) {
+            fromTo = time + ';' + hoursCopy[hourIndex].hours[split].split(';')[1];
+        } else {
+            fromTo = hoursCopy[hourIndex].hours[split].split(';')[0] + ';' + time;
+        }
+        hoursCopy[hourIndex].hours[split] = fromTo;
+        this.setState({hours: hoursCopy});
+    };
+
+    getHours = (hourIndex, from = true, split) => {
+        const fromTo = from ? 0 : 1;
+        try {
+            return this.state.hours[hourIndex].hours[split].split(';')[fromTo];}
+        catch (e) {
+            return '';
+        }
+    };
+
+    splitHours = hourIndex => {
+        let hoursCopy = this.state.hours.slice();
+        let hoursSplit = hoursCopy[hourIndex].hours[0].split(';');
+        hoursCopy[hourIndex].hours[1] = hoursSplit[1] + ';' + hoursSplit[0];
+        this.setState({hours: hoursCopy});
+    };
+
+    unSplitHours = hourIndex => {
+        let hoursCopy = this.state.hours.slice();
+        hoursCopy[hourIndex].hours[1] = '';
+        this.setState({hours: hoursCopy});
+    };
+
+    newHoursAvailable = () => {
+        let allDays = [];
+        for (let i = 0; i < this.state.hours.length; i++) {
+            allDays = allDays.concat(this.state.hours[i].days);
+        }
+        return allDays.length < 7 && this.state.hours.length < 7;
+    };
+
+    addNewHours = () => {
+        let newDays = [];
+        let allDays = [];
+        for (let i = 0; i < this.state.hours.length; i++) {
+            allDays = allDays.concat(this.state.hours[i].days);
+        }
+        days.forEach(day => {
+            if (!allDays.includes(day)) {
+                newDays.push(day);
+            }
+        });
+        let newHours = {
+            days: newDays,
+            hours: ['09:00;17:00']
+        };
+        let hoursCopy = this.state.hours.slice();
+        hoursCopy.push(newHours);
+        this.setState({hours: hoursCopy});
+    };
+
+    hoursCancel = () => {
+        this.setState({hours: this.loc.additionalInfo.hours, editHours: false});
+    };
+
+    hoursSave = () => {
+        let checkHours = this.state.hours.slice();
+        let i = 0;
+        while (i < checkHours.length) {
+            if (checkHours[i].days.length === 0) {
+                checkHours.splice(i, 1);
+            } else {
+                i++;
+            }
+        }
+        this.loc.additionalInfo.hours = checkHours;
+        this.setState({hours: checkHours, editHours: false});
+    };
+
+
+
     render() {
         return (
             <>
@@ -230,7 +316,8 @@ class CrawlrLocInfo extends React.Component{
                                                               onChange={e => this.setState({type: e.target.value.slice(0, locTypeMaxLength)})}
                                                 />
                                                 <Form.Text>{`Characters Remaining: ${locTypeMaxLength - this.state.type.length}`}</Form.Text>
-                                                <p style={{fontSize: 16, marginTop: 10}}>Note: Custom types may be more difficult to find in location searches </p>
+                                                <p style={{fontSize: 16, marginTop: 10}}>Note: Custom types may be more
+                                                    difficult to find in location searches </p>
                                                 <div className={styles.formButtons}>
                                                     <div className={styles.cancel} onClick={this.typeCancel}>
                                                         Cancel
@@ -304,73 +391,123 @@ class CrawlrLocInfo extends React.Component{
                                         }
                                     </div>
                                 </div>
+                                {this.state.editHours ?
+                                    <>
+                                        {this.state.hours.map((hour, hourIndex) => {
+                                            return (
+                                                <>
+                                                    <div className={styles.flexRowWrap} style={{marginTop: 40}}>
+                                                        {days.map((day, index) => {
+                                                            if (hour.days.includes(day)) { //Day active
+                                                                return (
+                                                                    <div className={styles.activeDayButton}
+                                                                         onClick={() => this.removeDay(hourIndex, day)}>
+                                                                        {day}
+                                                                    </div>
+                                                                );
+                                                            } else if (dayTaken(this.state.hours, day)) { //Day is taken
+                                                                return (
+                                                                    <div className={styles.takenDayButton}>
+                                                                        {day}
+                                                                    </div>
+                                                                );
+                                                            } else { //day is vacant
+                                                                return (
+                                                                    <div className={styles.vacantDayButton}
+                                                                         onClick={() => this.takeDay(hourIndex, day)}>
+                                                                        {day}
+                                                                    </div>
+                                                                );
+                                                            }
+                                                        })}
+                                                    </div>
+                                                    <Form inline onSubmit={e => e.preventDefault()}
+                                                          style={{marginTop: 10, marginBottom: 10}}>
+                                                        <div className={styles.hoursText}>From:</div>
+                                                        <Form.Group controlId='timeDigits1'>
+                                                            <Form.Control type='time'
+                                                                          onChange={e => {
+                                                                              this.setHours(e.target.value, hourIndex, true, 0);
+                                                                          }}
+                                                                          value={this.getHours(hourIndex, true, 0)}/>
+                                                        </Form.Group>
+                                                        <div className={styles.hoursText} style={{marginLeft: 20}}>To:
+                                                        </div>
+                                                        <Form.Group controlId='timeDigits2'>
+                                                            <Form.Control type='time'
+                                                                          onChange={e => {
+                                                                              this.setHours(e.target.value, hourIndex, false, 0);
+                                                                          }}
+                                                                          value={this.getHours(hourIndex, false, 0)}/>
+                                                        </Form.Group>
+                                                    </Form>
+                                                    {this.state.hours[hourIndex].hours[1] ?
+                                                        <>
+                                                            <Form inline onSubmit={e => e.preventDefault()}
+                                                                  style={{marginTop: 10, marginBottom: 10}}>
+                                                                <div className={styles.hoursText}>From:</div>
+                                                                <Form.Group controlId='timeDigits1'>
+                                                                    <Form.Control type='time'
+                                                                                  onChange={e => {
+                                                                                      this.setHours(e.target.value, hourIndex, true, 1);
+                                                                                  }}
+                                                                                  value={this.getHours(hourIndex, true, 1)}/>
+                                                                </Form.Group>
+                                                                <div className={styles.hoursText}
+                                                                     style={{marginLeft: 20}}>To:
+                                                                </div>
+                                                                <Form.Group controlId='timeDigits2'>
+                                                                    <Form.Control type='time'
+                                                                                  onChange={e => {
+                                                                                      this.setHours(e.target.value, hourIndex, false, 1);
+                                                                                  }}
+                                                                                  value={this.getHours(hourIndex, false, 1)}/>
+                                                                </Form.Group>
+                                                            </Form>
+                                                            <div className={styles.activeDayButton}
+                                                                 style={{width: 220}}
+                                                                 onClick={() => this.unSplitHours(hourIndex)}>
+                                                                Remove Service Hours Split
+                                                            </div>
+                                                        </> :
 
-                                {this.state.hours.map((hour, hourIndex) => {
-                                    return (
-                                        <div className={styles.flexRowWrap}>
-                                            {days.map((day, index) => {
-                                                if (hour.days.includes(day)) { //Day active
-                                                    return (
                                                         <div className={styles.activeDayButton}
-                                                          onClick={() => this.removeDay(hourIndex, day)}>
-                                                            {day}
+                                                             style={{width: 160}}
+                                                             onClick={() => this.splitHours(hourIndex)}>
+                                                            Split Service Hours
                                                         </div>
-                                                    );
-                                                } else if (dayTaken(this.state.hours, day)) { //Day is taken
-                                                    return (
-                                                        <div className={styles.takenDayButton}>
-                                                            {day}
-                                                        </div>
-                                                    );
-                                                } else { //day is vacant
-                                                    return (
-                                                        <div className={styles.vacantDayButton}
-                                                             onClick={() => this.takeDay(hourIndex, day)}>
-                                                            {day}
-                                                        </div>
-                                                    );
-                                                }
-                                            })}
+                                                    }
+                                                    {this.state.hours.length - 1 !== hourIndex &&
+                                                    <hr className='w-75' style={{marginTop: 40}}/>}
+                                                </>
+                                            );
+                                        })}
+
+                                        {this.newHoursAvailable() &&
+                                        <div className={styles.addHours}
+                                             onClick={this.addNewHours}>
+                                            <Icon path={mdiPlus} color={'green'} size={1.2}/>
+                                            Add additional hours
+                                        </div>}
+                                        <div className={styles.formButtons}>
+                                            <div className={styles.cancel} onClick={this.hoursCancel}>
+                                                Cancel
+                                            </div>
+                                            <div className={styles.save}
+                                                 onClick={this.hoursSave}>
+                                                Save
+                                            </div>
                                         </div>
-                                    );
-                                })}
-
-                                {/*<div className={styles.flexRowWrap}>*/}
-                                {/*    {days.map((day, index) => {*/}
-                                {/*        if (false) { //Day active*/}
-                                {/*            return <div className={styles.activeDayButton}>{day}</div>;*/}
-                                {/*        } else if (false) { //Day is vacant*/}
-                                {/*            return <div className={styles.vacantDayButton}>{day}</div>;*/}
-                                {/*        } else { //day is taken*/}
-                                {/*            return <div className={styles.takenDayButton}>{day}</div>;*/}
-                                {/*        }*/}
-                                {/*    })}*/}
-                                {/*</div>*/}
-
-                                {/*{this.state.editHours ?*/}
-                                {/*    <Form onSubmit={e => e.preventDefault()}>*/}
-                                {/*        <Form.Group controlId="editHours">*/}
-                                {/*            <Form.Control type="hours"*/}
-                                {/*                          as="textarea"*/}
-                                {/*                          placeholder="Enter location hours..."*/}
-                                {/*                          value={this.state.hours}*/}
-                                {/*                          onChange={e => this.setState({hours: e.target.value.slice(0, locDescMaxLength)})}*/}
-                                {/*            />*/}
-                                {/*            <Form.Text>{`Characters Remaining: ${locDescMaxLength - this.state.hours.length}`}</Form.Text>*/}
-                                {/*            <div className={styles.formButtons}>*/}
-                                {/*                <div className={styles.cancel} onClick={this.hoursCancel}>*/}
-                                {/*                    Cancel*/}
-                                {/*                </div>*/}
-                                {/*                <div className={styles.save} onClick={this.hoursSave}>*/}
-                                {/*                    Save*/}
-                                {/*                </div>*/}
-                                {/*            </div>*/}
-                                {/*        </Form.Group>*/}
-                                {/*    </Form>*/}
-                                {/*    : <>{this.state.hours ?*/}
-                                {/*        <p className={styles.infoContent}>{this.state.hours}</p> :*/}
-                                {/*        <p className={styles.emptyContent}>No Hours</p>}</>*/}
-                                {/*}*/}
+                                    </>
+                                    : this.state.hours.map(hour => {
+                                        return (
+                                            <div className={styles.flexRowWrap}>
+                                                <div className={styles.infoContent} style={{flex: 1}}>{dayArrayToInternal(hour.days)}</div>
+                                                <div className={styles.infoContent}>{hour.hours.map(h => militaryBlockToStandardInterval(h)).join(', ')}</div>
+                                            </div>
+                                        )
+                                    })
+                                }
                                 <hr/>
 
 

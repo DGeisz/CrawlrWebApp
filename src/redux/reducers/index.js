@@ -16,29 +16,11 @@ const initialState = {
                 hours: [
                     {
                         days: ['Mon', 'Tue', 'Wed'],
-                        hours: [
-                            {
-                                from: '9:00 AM',
-                                to: '12:00 PM'
-                            },
-                            {
-                                from: '2:00 PM',
-                                to: '5:00 PM'
-                            }
-                        ]
+                        hours: ['07:30;14:00', '16:00;22:30']
                     },
                     {
-                        days: ['Thu', 'Fri', 'Say'],
-                        hours: [
-                            {
-                                from: '7:00 AM',
-                                to: '10:00 AM'
-                            },
-                            {
-                                from: '1:00 PM',
-                                to: '9:00 PM'
-                            }
-                        ]
+                        days: ['Thu', 'Fri', 'Sat'],
+                        hours: ['07:30;14:00', '16:00;22:30']
                     }
                 ]
 
@@ -70,29 +52,11 @@ const initialState = {
                 hours: [
                     {
                         days: ['Mon', 'Tue', 'Wed'],
-                        hours: [
-                            {
-                                from: '9:00 AM',
-                                to: '12:00 PM'
-                            },
-                            {
-                                from: '2:00 PM',
-                                to: '5:00 PM'
-                            }
-                        ]
+                        hours: ['07:30;14:00', '16:00;22:30']
                     },
                     {
-                        days: ['Thu', 'Fri', 'Say'],
-                        hours: [
-                            {
-                                from: '7:00 AM',
-                                to: '10:00 AM'
-                            },
-                            {
-                                from: '1:00 PM',
-                                to: '9:00 PM'
-                            }
-                        ]
+                        days: ['Thu', 'Fri', 'Sat'],
+                        hours: ['07:30;14:00', '16:00;22:30']
                     }
                 ]
             },
@@ -123,29 +87,11 @@ const initialState = {
                 hours: [
                     {
                         days: ['Mon', 'Tue', 'Wed'],
-                        hours: [
-                            {
-                                from: '9:00 AM',
-                                to: '12:00 PM'
-                            },
-                            {
-                                from: '2:00 PM',
-                                to: '5:00 PM'
-                            }
-                        ]
+                        hours: ['07:30;14:00', '16:00;22:30']
                     },
                     {
-                        days: ['Thu', 'Fri', 'Say'],
-                        hours: [
-                            {
-                                from: '7:00 AM',
-                                to: '10:00 AM'
-                            },
-                            {
-                                from: '1:00 PM',
-                                to: '9:00 PM'
-                            }
-                        ]
+                        days: ['Thu', 'Fri', 'Sat'],
+                        hours: ['07:30;14:00', '16:00;22:30']
                     }
                 ]
             },
@@ -176,29 +122,11 @@ const initialState = {
                 hours: [
                     {
                         days: ['Mon', 'Tue', 'Wed'],
-                        hours: [
-                            {
-                                from: '9:00 AM',
-                                to: '12:00 PM'
-                            },
-                            {
-                                from: '2:00 PM',
-                                to: '5:00 PM'
-                            }
-                        ]
+                        hours: ['07:30;14:00', '16:00;22:30']
                     },
                     {
-                        days: ['Thu', 'Fri', 'Say'],
-                        hours: [
-                            {
-                                from: '7:00 AM',
-                                to: '10:00 AM'
-                            },
-                            {
-                                from: '1:00 PM',
-                                to: '9:00 PM'
-                            }
-                        ]
+                        days: ['Thu', 'Fri', 'Sat'],
+                        hours: ['07:30;14:00', '16:00;22:30']
                     }
                 ]
             },
