@@ -12,7 +12,12 @@ const initialState = {
                 description: "A super fun bar filled with fun-loving folks",
                 phone: "234-123-3212",
                 website: "www.firstloc.com",
-                address: "234 LaClede Way, Norman, OK, 20303",
+                address: {
+                    street: '605 High Valley Court',
+                    city: 'Colorado Springs',
+                    state: 'CO',
+                    zipCode: 80906
+                },
                 hours: [
                     {
                         days: ['Mon', 'Tue', 'Wed'],
@@ -33,7 +38,7 @@ const initialState = {
             },
             event: {
                 content: "We are having a real life vampire",
-                expires: 29834239847
+                expires: '2020-06-17T15:20'
             },
             promotion: {
                 content: "Werewolves get free drinks all night",
@@ -48,7 +53,12 @@ const initialState = {
                 description: "A super fun bar filled with fun-loving folks",
                 phone: "234-123-3212",
                 website: "www.firstloc.com",
-                address: "234 LaClede Way, Norman, OK, 20303",
+                address: {
+                    street: '605 High Valley Court',
+                    city: 'Colorado Springs',
+                    state: 'CO',
+                    zipCode: 80906
+                },
                 hours: [
                     {
                         days: ['Mon', 'Tue', 'Wed'],
@@ -68,7 +78,7 @@ const initialState = {
             },
             event: {
                 content: "We are having a real life vampire",
-                expires: 29834239847
+                expires:  '2020-06-17T15:20'
             },
             promotion: {
                 content: "Werewolves get free drinks all night",
@@ -83,7 +93,12 @@ const initialState = {
                 description: "A super fun bar filled with fun-loving folks",
                 phone: "234-123-3212",
                 website: "www.firstloc.com",
-                address: "234 LaClede Way, Norman, OK, 20303",
+                address: {
+                    street: '605 High Valley Court',
+                    city: 'Colorado Springs',
+                    state: 'CO',
+                    zipCode: 80906
+                },
                 hours: [
                     {
                         days: ['Mon', 'Tue', 'Wed'],
@@ -103,7 +118,7 @@ const initialState = {
             },
             event: {
                 content: "We are having a real life vampire",
-                expires: 29834239847
+                expires:  '2020-06-17T15:20'
             },
             promotion: {
                 content: "Werewolves get free drinks all night",
@@ -118,7 +133,12 @@ const initialState = {
                 description: "A super fun bar filled with fun-loving folks",
                 phone: "234-123-3212",
                 website: "www.firstloc.com",
-                address: "234 LaClede Way, Norman, OK, 20303",
+                address: {
+                    street: '605 High Valley Court',
+                    city: 'Colorado Springs',
+                    state: 'CO',
+                    zipCode: 80906
+                },
                 hours: [
                     {
                         days: ['Mon', 'Tue', 'Wed'],
@@ -138,7 +158,7 @@ const initialState = {
             },
             event: {
                 content: "We are having a real life vampire",
-                expires: 29834239847
+                expires: '2020-06-17T15:20'
             },
             promotion: {
                 content: "Werewolves get free drinks all night",
@@ -151,11 +171,9 @@ const initialState = {
 
 
 const rootReducer = (state = initialState, action) => {
-    console.log("Now we're here")
     switch (action.type) {
 
         case SIGNOUT:
-            console.log("Signing out");
             return Object.assign({}, state, {user: null, userID: null});
         default:
             return state;

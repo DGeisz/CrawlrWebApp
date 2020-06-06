@@ -7,11 +7,19 @@ import {connect} from 'react-redux'
 import {Form} from "react-bootstrap";
 import Icon from "@mdi/react";
 import {mdiPlus} from "@mdi/js";
-import {dayArrayToInternal, militaryBlockToStandardInterval} from "../../../../../helper_functions/generalFunctions";
+import {
+    dayArrayToInternal,
+    hoursToIntervals,
+    militaryBlockToStandardInterval
+} from "../../../../../helper_functions/generalFunctions";
+import {stateAbbreviations} from "../../../../../app-constants/states";
 
 const locNameMaxLength = 40;
 const locTypeMaxLength = 15;
 const locDescMaxLength = 140;
+const locStreetMaxLength = 95;
+const locCityMaxLength = 28;
+
 
 const types = ['Bar', 'Club', 'House', 'Food', 'Coffee & Tea', 'Dessert'];
 
@@ -57,7 +65,8 @@ class CrawlrLocInfo extends React.Component{
             editPhone: false,
             hours: this.loc.additionalInfo.hours,
             editHours: false,
-            exTime: ''
+            address: this.loc.additionalInfo.address,
+            editAddress: false,
         }
     }
 
@@ -224,6 +233,15 @@ class CrawlrLocInfo extends React.Component{
         }
         this.loc.additionalInfo.hours = checkHours;
         this.setState({hours: checkHours, editHours: false});
+    };
+
+    addressSave = () => {
+        this.loc.additionalInfo.address = this.state.address;
+        this.setState({editAddress: false});
+    };
+
+    addressCancel = () => {
+        this.setState({address: this.loc.additionalInfo.address, editAddress: false});
     };
 
 
@@ -489,7 +507,8 @@ class CrawlrLocInfo extends React.Component{
                                             <Icon path={mdiPlus} color={'green'} size={1.2}/>
                                             Add additional hours
                                         </div>}
-                                        <div className={styles.formButtons}>
+                                        <div className={styles.formButtons}
+                                             style={{marginTop: 30}}>
                                             <div className={styles.cancel} onClick={this.hoursCancel}>
                                                 Cancel
                                             </div>
@@ -502,11 +521,150 @@ class CrawlrLocInfo extends React.Component{
                                     : this.state.hours.map(hour => {
                                         return (
                                             <div className={styles.flexRowWrap}>
-                                                <div className={styles.infoContent} style={{flex: 1}}>{dayArrayToInternal(hour.days)}</div>
-                                                <div className={styles.infoContent}>{hour.hours.map(h => militaryBlockToStandardInterval(h)).join(', ')}</div>
+                                                <div className={styles.infoContent}
+                                                     style={{flex: 1}}>
+                                                    {dayArrayToInternal(hour.days)}
+                                                </div>
+                                                <div
+                                                    className={styles.infoContent}>
+                                                    {hoursToIntervals(hour.hours)}
+                                                </div>
                                             </div>
                                         )
                                     })
+                                }
+                                <hr/>
+
+                                {/*Address*/}
+                                <div className={styles.infoFieldHeader}>
+                                    <div className={styles.infoFieldTopLeft}>
+                                        <h2 className='mb-4'>Address</h2>
+                                    </div>
+                                    <div>
+                                        {
+                                            !this.state.editAddress &&
+                                            <h2 className={styles.editInfoField}
+                                                onClick={() => this.setState({editAddress: true})}>
+                                                Edit
+                                            </h2>
+                                        }
+                                    </div>
+                                </div>
+                                {this.state.editAddress ?
+                                    <Form onSubmit={e => e.preventDefault()}>
+                                        <Form.Group controlId="editAddress">
+                                            <Form.Label className={styles.smallBoldMagentaText}>Street
+                                                Address:</Form.Label>
+                                            <Form.Control type='street'
+                                                          placeholder='Enter street address...'
+                                                          value={this.state.address.street}
+                                                          onChange={
+                                                              e => {
+                                                                  this.setState(
+                                                                      {
+                                                                          address: Object.assign(
+                                                                              {},
+                                                                              this.state.address,
+                                                                              {
+                                                                                  street: e.target.value.slice(0, locStreetMaxLength)
+                                                                              }
+                                                                          )
+                                                                      }
+                                                                  )
+                                                              }
+                                                          }/>
+                                            <Form.Text>{`Characters Remaining: ${locStreetMaxLength - this.state.address.street.length}`}</Form.Text>
+                                            <Form.Label className={styles.smallBoldMagentaText}
+                                                        style={{marginTop: 20}}>City:</Form.Label>
+                                            <Form.Control type='city'
+                                                          placeholder='Enter city...'
+                                                          value={this.state.address.city}
+                                                          onChange={
+                                                              e => {
+                                                                  this.setState(
+                                                                      {
+                                                                          address: Object.assign(
+                                                                              {},
+                                                                              this.state.address,
+                                                                              {
+                                                                                  city: e.target.value.slice(0, locCityMaxLength)
+                                                                              }
+                                                                          )
+                                                                      }
+                                                                  )
+                                                              }
+                                                          }/>
+                                            <Form.Text>{`Characters Remaining: ${locCityMaxLength - this.state.address.city.length}`}</Form.Text>
+
+                                            <Form.Label className={styles.smallBoldMagentaText}
+                                                        style={{marginTop: 20}}>State:</Form.Label>
+                                            <Form.Control type='state'
+                                                          placeholder='Enter state...'
+                                                          value={this.state.address.state}
+                                                          as='select'
+                                                          onChange={
+                                                              e => {
+                                                                  this.setState(
+                                                                      {
+                                                                          address: Object.assign(
+                                                                              {},
+                                                                              this.state.address,
+                                                                              {
+                                                                                  state: e.target.value
+                                                                              }
+                                                                          )
+                                                                      }
+                                                                  )
+                                                              }
+                                                          }>
+                                                {stateAbbreviations.map(state => <option>{state}</option>)}
+                                            </Form.Control>
+                                            <Form.Label className={styles.smallBoldMagentaText} style={{marginTop: 20}}>
+                                                Zip Code:</Form.Label>
+                                            <Form.Control type='zip code'
+                                                          placeholder='Enter zip code...'
+                                                          value={this.state.address.zipCode}
+                                                          onChange={
+                                                              e => {
+                                                                  this.setState(
+                                                                      {
+                                                                          address: Object.assign(
+                                                                              {},
+                                                                              this.state.address,
+                                                                              {
+                                                                                  zipCode: e.target.value.slice(0, 5)
+                                                                              }
+                                                                          )
+                                                                      }
+                                                                  )
+                                                              }
+                                                          }/>
+
+
+                                            <div className={styles.formButtons}>
+                                                <div className={styles.cancel} onClick={this.addressCancel}>
+                                                    Cancel
+                                                </div>
+                                                <div className={this.state.name ? styles.save : styles.disabledSave}
+                                                     onClick={this.addressSave}>
+                                                    Save
+                                                </div>
+                                            </div>
+                                        </Form.Group>
+                                    </Form>
+                                    :
+                                    <>
+                                        {this.state.address ?
+                                            <>
+                                                <div className={styles.infoContent}>
+                                                    {this.state.address.street}
+                                                </div>
+                                                <div className={styles.infoContent}>
+                                                    {`${this.state.address.city}, ${this.state.address.state} ${this.state.address.zipCode}`}
+                                                </div>
+                                            </> :
+                                            <p className={styles.emptyContent}>No address</p>}
+                                    </>
                                 }
                                 <hr/>
 
@@ -518,11 +676,11 @@ class CrawlrLocInfo extends React.Component{
                                     </div>
                                     <div>
                                         {
-                                            !this.state.editWebsite ?
-                                                <h2 className={styles.editInfoField}
-                                                    onClick={() => this.setState({editWebsite: true})}>
-                                                    Edit
-                                                </h2> : null
+                                            !this.state.editWebsite &&
+                                            <h2 className={styles.editInfoField}
+                                                onClick={() => this.setState({editWebsite: true})}>
+                                                Edit
+                                            </h2>
                                         }
                                     </div>
                                 </div>

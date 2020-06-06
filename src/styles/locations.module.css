@@ -457,3 +457,8 @@
 .addHours:active {
     background-color: #bcccbc;
 }
+
+.smallBoldMagentaText {
+    color: #9e0b66;
+    font-weight: 600;
+}

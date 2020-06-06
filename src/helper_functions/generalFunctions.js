@@ -2,7 +2,7 @@
  * Takes in a military block time i.e. '12:20;14:30' and
  * output the standard interval it represents, ie '12:20 PM - 2:30 PM
  */
-export function militaryBlockToStandardInterval(militaryBlock) {
+function militaryBlockToStandardInterval(militaryBlock) {
     let standards = [];
     let blockSplit = militaryBlock.split(';');
     blockSplit.forEach((block, index) => {
@@ -12,6 +12,14 @@ export function militaryBlockToStandardInterval(militaryBlock) {
         standards.push(hours + ':' + block.split(':')[1] + amPm);
     });
     return standards.join(' - ');
+}
+
+export function hoursToIntervals(hours) {
+    if (hours[1] === '') {
+        return militaryBlockToStandardInterval(hours[0]);
+    } else {
+        return hours.map(hour => militaryBlockToStandardInterval(hour)).join(', ');
+    }
 }
 
 const days = {
@@ -51,10 +59,11 @@ export function dayArrayToInternal(dayArray) {
     let dayCluster = [[dayArray[0]]];
     let clusterIndex = 0;
     for (let i = 1; i < dayArray.length; i++){
-        if (days[dayArray[i - 1]] + 1 === days[dayArray[i]]) {
+        if ((days[dayArray[i - 1]] + 1) % 7 === days[dayArray[i]]) {
             dayCluster[clusterIndex].push(dayArray[i]);
         } else {
             dayCluster.push([dayArray[i]]);
+            clusterIndex++;
         }
     }
     let finalInterval = '';
@@ -71,4 +80,20 @@ export function dayArrayToInternal(dayArray) {
         }
     });
     return finalInterval;
+}
+
+/**
+ * Converts the html datetime-local input to a readable string
+ */
+export function dateTimeToReadable(dateTime) {
+    let split = dateTime.split('T');
+    let milTime = split[1];
+    const milHours = parseInt(milTime.split(':')[0]);
+    const hours = ((milHours + 11) % 12) + 1;
+    let amPm = milHours > 11 ? ' PM' : ' AM';
+    let finalString = hours + ':' + milTime.split(':')[1] + amPm + ', ';
+    let dateSplit = split[0].split('-');
+    let month = dateSplit[1][0] === '0' ? dateSplit[1].substr(1) : dateSplit[1];
+    finalString += month + '/' + dateSplit[2] + '/' + dateSplit[0];
+    return finalString;
 }
