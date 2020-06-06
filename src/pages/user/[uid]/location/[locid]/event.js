@@ -47,7 +47,8 @@ class CrawlrLocInfo extends React.Component{
             description: this.loc.event.content,
             editDescription: false,
             expires: this.loc.event.expires,
-            editExpires: false
+            editExpires: false,
+            check: false
         }
     }
 
@@ -67,6 +68,19 @@ class CrawlrLocInfo extends React.Component{
     expiresSave = () => {
         this.loc.event.expires = this.state.expires;
         this.setState({editExpires: false});
+    };
+
+    handleCheck = (value) => {
+        console.log("Value:", value);
+        if (value) {
+            this.setState({expires: ''});
+        } else {
+            if (this.loc.event.expires === ''){
+                this.setState({expires: '2020-01-01T00:00'});
+            } else {
+                this.setState({expires: this.loc.event.expires});
+            }
+        }
     };
 
 
@@ -117,7 +131,8 @@ class CrawlrLocInfo extends React.Component{
                                             </div>
                                         </Form.Group>
                                     </Form>
-                                    : <>{this.state.description ? <p className={styles.infoContent}>{this.state.description}</p> :
+                                    : <>{this.state.description ?
+                                        <p className={styles.infoContent}>{this.state.description}</p> :
                                         <p className={styles.emptyContent}>No event description</p>}</>
                                 }
                                 <hr/>
@@ -141,28 +156,36 @@ class CrawlrLocInfo extends React.Component{
                                     <>
                                         <Form onSubmit={e => e.preventDefault()}>
                                             <Form.Group controlId='formBasicCheckbox'>
-                                                <Form.Check type='checkbox' label='Never Expires' style={{color: 'red'}}/>
+                                                <Form.Check type='checkbox'
+                                                            label='Never Expires'
+                                                            checked={this.state.expires === ''}
+                                                            onChange={e => this.handleCheck(e.target.checked)}
+                                                            style={{color: '#0a4782', fontWeight: 600}}/>
                                             </Form.Group>
-                                            <Form.Group controlId="editExpires">
-                                                <Form.Label>Enter event expiration date/time:</Form.Label>
-                                                <Form.Control type="datetime-local"
-                                                              placeholder=''
-                                                              value={this.state.expires}
-                                                              onChange={e => this.setState({expires: e.target.value})}
-                                                />
-                                                <div className={styles.formButtons}>
-                                                    <div className={styles.cancel} onClick={this.expiresCancel}>
-                                                        Cancel
-                                                    </div>
-                                                    <div className={styles.save}
-                                                         onClick={this.expiresSave}>
-                                                        Save
-                                                    </div>
+                                            {
+                                                this.state.expires === '' ? null :
+                                                    <Form.Group controlId="editExpires">
+                                                        <Form.Label>Enter event expiration date/time:</Form.Label>
+                                                        <Form.Control type="datetime-local"
+                                                                      placeholder=''
+                                                                      value={this.state.expires}
+                                                                      onChange={e => this.setState({expires: e.target.value})}
+                                                        />
+                                                    </Form.Group>
+                                            }
+                                            <div className={styles.formButtons}>
+                                                <div className={styles.cancel} onClick={this.expiresCancel}>
+                                                    Cancel
                                                 </div>
-                                            </Form.Group>
+                                                <div className={styles.save}
+                                                     onClick={this.expiresSave}>
+                                                    Save
+                                                </div>
+                                            </div>
                                         </Form>
                                     </>
-                                    : <>{this.state.expires ? <p className={styles.infoContent}>{dateTimeToReadable(this.state.expires)}</p> :
+                                    : <>{this.state.expires ?
+                                        <p className={styles.infoContent}>{dateTimeToReadable(this.state.expires)}</p> :
                                         <p className={styles.emptyContent}>No expiration date</p>}</>
                                 }
                                 <hr/>
