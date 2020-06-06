@@ -250,7 +250,8 @@ class CrawlrLocInfo extends React.Component{
         return (
             <>
                 <NavBar/>
-                <LocationNavigation>
+                <LocationNavigation locid={this.props.router.query.locid}
+                                    uid={this.props.router.query.uid}>
                     <h1 className={`${styles.locationTitle} mb-4`}>
                         {this.loc.name + ' · Information'}
                     </h1>

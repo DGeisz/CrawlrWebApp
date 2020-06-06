@@ -71,7 +71,6 @@ class CrawlrLocInfo extends React.Component{
     };
 
     handleCheck = (value) => {
-        console.log("Value:", value);
         if (value) {
             this.setState({expires: ''});
         } else {
@@ -90,7 +89,7 @@ class CrawlrLocInfo extends React.Component{
         return (
             <>
                 <NavBar/>
-                <LocationNavigation>
+                <LocationNavigation uid={this.props.router.query.uid} locid={this.props.router.query.locid}>
                     <h1 className={`${styles.locationTitle} mb-4`}>
                         {this.loc.name + ' · Events'}
                     </h1>
@@ -160,7 +159,10 @@ class CrawlrLocInfo extends React.Component{
                                                             label='Never Expires'
                                                             checked={this.state.expires === ''}
                                                             onChange={e => this.handleCheck(e.target.checked)}
-                                                            style={{color: '#0a4782', fontWeight: 600}}/>
+                                                            style={{
+                                                                color: '#0a4782',
+                                                                fontWeight: 600
+                                                            }}/>
                                             </Form.Group>
                                             {
                                                 this.state.expires === '' ? null :
@@ -186,7 +188,7 @@ class CrawlrLocInfo extends React.Component{
                                     </>
                                     : <>{this.state.expires ?
                                         <p className={styles.infoContent}>{dateTimeToReadable(this.state.expires)}</p> :
-                                        <p className={styles.emptyContent}>No expiration date</p>}</>
+                                        <p className={styles.infoContent}>Never</p>}</>
                                 }
                                 <hr/>
                             </div>

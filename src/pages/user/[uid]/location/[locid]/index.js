@@ -37,7 +37,7 @@ const CrawlrLoc = ({locations}) => {
     const topRef = useRef();
 
     const router = useRouter();
-    const {locid} = router.query;
+    const {uid, locid} = router.query;
     const loc = locations.find(location => location._id === locid);
     console.log("Loc:", loc.name);
 
@@ -80,7 +80,7 @@ const CrawlrLoc = ({locations}) => {
             {/*    })}*/}
             {/*</div>*/}
 
-            <LocationNavigation>
+            <LocationNavigation locid={locid} uid={uid}>
                 <h1 className={`${styles.locationTitle} mb-4`}>
                     {loc.name + ' · Dashboard'}
                 </h1>

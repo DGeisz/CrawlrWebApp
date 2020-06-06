@@ -24,6 +24,11 @@
     background-color: #cccccc;
 }
 
+.sideOptionText {
+    text-decoration: none !important;
+    color: #343a40 !important;
+}
+
 .infoHeader {
     font-size: 10pt;
     color: #cccccc;
