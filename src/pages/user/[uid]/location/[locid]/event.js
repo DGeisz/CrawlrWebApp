@@ -37,7 +37,7 @@ function dayTaken(hours, day) {
     return false;
 }
 
-class CrawlrLocInfo extends React.Component{
+class CrawlrEvents extends React.Component{
 
     constructor(props) {
         super(props);
@@ -201,4 +201,4 @@ class CrawlrLocInfo extends React.Component{
 
 }
 
-export default connect(mapStateToProps)(withRouter(CrawlrLocInfo));
+export default connect(mapStateToProps)(withRouter(CrawlrEvents));

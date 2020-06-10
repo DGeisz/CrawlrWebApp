@@ -467,3 +467,31 @@
     color: #9e0b66;
     font-weight: 600;
 }
+
+.promoActiveToday {
+    font-weight: bold;
+    color: #28a745;
+    margin-left: 5px;
+}
+
+.promoActivated {
+    font-weight: bold;
+    color: #007bff;
+    margin-left: 5px;
+}
+
+.promoNotActivated {
+    font-weight: bold;
+    color: #dc3545;
+    margin-left: 5px;
+}
+
+.promoLegendContainer {
+    padding: 5px;
+}
+
+.promoLegendDescription {
+    font-weight: 600;
+    margin-left: 5px;
+    color: #828282;
+}

@@ -6,6 +6,7 @@ const initialState = {
     locations: [
         {
             name: "Danny's First location",
+            // name: '<script>console.log("Gottem")</script>',
             _id: "aasdfhjasdhfaksjdfh",
             type: "Bar",
             additionalInfo: {
