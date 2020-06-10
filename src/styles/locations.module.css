@@ -495,3 +495,14 @@
     margin-left: 5px;
     color: #828282;
 }
+
+.labelToggle {
+    font-weight: 600;
+    margin-top: 20px;
+    color: #548f74;
+    transition: color 0.1s;
+}
+
+.labelToggle:hover {
+    color: #75bf9d;
+}

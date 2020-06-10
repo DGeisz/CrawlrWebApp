@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 import Col from "react-bootstrap/Col";
 import {emojiArray, emojiOpacity, emojiSize, emojiStyle} from "../../../app-constants/emojis";
 import Link from "next/link";
-import {currentEmoji} from "../../../helper_functions/emojiHelpers";
+import {currentEmoji} from "../../../utils/emojiHelpers";
 import Button from "react-bootstrap/Button";
 
 const mapStateToProps = state => {

@@ -3,6 +3,28 @@ import {SIGNOUT} from "../constants";
 const initialState = {
     user: "Danny Boi",
     userID: "sdsflkasdfj",
+    promotions: {
+        aasdfhjasdhfaksjdfh: [
+            {
+                activated: true,
+                title: 'My first promo',
+                description: 'Everyone who comes gets a free dino',
+                dates: 'Wed.Thu:Wed Jun 03 2020'
+            },
+            {
+                activated: true,
+                title: 'My first promo',
+                description: 'Everyone who comes gets a free walrus',
+                dates: 'Thu.Fri:Wed Jun 21 2020'
+            },
+            {
+                activated: false,
+                title: 'My first promo',
+                description: 'Everyone who comes gets a free triceratops',
+                dates: ':Fri Jun 12 2020'
+            }
+        ]
+    },
     locations: [
         {
             name: "Danny's First location",
@@ -38,11 +60,11 @@ const initialState = {
                 allTime: [245, 1203, 450, 128, 200]
             },
             event: {
-                content: "We are having a real life vampire",
+                description: "We are having a real life vampire",
                 expires: '2020-06-17T15:20'
             },
             promotion: {
-                content: "Werewolves get free drinks all night",
+                description: "Werewolves get free drinks all night",
                 expires: 123908174234
             }
         },
@@ -78,11 +100,11 @@ const initialState = {
                 allTime: [245, 1203, 450, 128, 200]
             },
             event: {
-                content: "We are having a real life vampire",
+                description: "We are having a real life vampire",
                 expires:  '2020-06-17T15:20'
             },
             promotion: {
-                content: "Werewolves get free drinks all night",
+                description: "Werewolves get free drinks all night",
                 expires: 123908174234
             }
         },
@@ -118,11 +140,11 @@ const initialState = {
                 allTime: [245, 1203, 450, 128, 200]
             },
             event: {
-                content: "We are having a real life vampire",
+                description: "We are having a real life vampire",
                 expires:  '2020-06-17T15:20'
             },
             promotion: {
-                content: "Werewolves get free drinks all night",
+                description: "Werewolves get free drinks all night",
                 expires: 123908174234
             }
         },
@@ -158,11 +180,11 @@ const initialState = {
                 allTime: [245, 1203, 450, 128, 200]
             },
             event: {
-                content: "We are having a real life vampire",
+                description: "We are having a real life vampire",
                 expires: '2020-06-17T15:20'
             },
             promotion: {
-                content: "Werewolves get free drinks all night",
+                description: "Werewolves get free drinks all night",
                 expires: 123908174234
             }
         },

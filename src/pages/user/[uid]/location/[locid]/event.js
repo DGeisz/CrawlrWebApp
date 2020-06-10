@@ -5,16 +5,10 @@ import LocationNavigation from "../../../../../components/LocationNavigation";
 import styles from "../../../../../styles/locations.module.css";
 import {connect} from 'react-redux'
 import {Form} from "react-bootstrap";
-import {
-    dateTimeToReadable,
-    militaryBlockToStandardInterval
-} from "../../../../../helper_functions/generalFunctions";
+import {dateTimeToReadable} from "../../../../../utils/miscFunctions";
+
 
 const eventDescriptionMaxLength = 100;
-
-const types = ['Bar', 'Club', 'House', 'Food', 'Coffee & Tea', 'Dessert'];
-
-const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 
 
@@ -25,18 +19,6 @@ const mapStateToProps = state => {
 };
 
 
-/**
- * Helper function that let's me know if a day has been taken in
- * a set of hours*/
-function dayTaken(hours, day) {
-    for (let i = 0; i < hours.length; i++){
-        if (hours[i].days.includes(day)){
-            return true;
-        }
-    }
-    return false;
-}
-
 class CrawlrEvents extends React.Component{
 
     constructor(props) {
@@ -44,7 +26,7 @@ class CrawlrEvents extends React.Component{
         this.locid = this.props.router.query.locid;
         this.loc = this.props.locations.find(loc => loc._id === this.locid);
         this.state = {
-            description: this.loc.event.content,
+            description: this.loc.event.description,
             editDescription: false,
             expires: this.loc.event.expires,
             editExpires: false,
@@ -53,11 +35,11 @@ class CrawlrEvents extends React.Component{
     }
 
     descriptionCancel = () => {
-        this.setState({description: this.loc.event.content, editDescription: false});
+        this.setState({description: this.loc.event.description, editDescription: false});
     };
 
     descriptionSave = () => {
-        this.loc.event.content = this.state.description;
+        this.loc.event.description = this.state.description;
         this.setState({editDescription: false});
     };
 

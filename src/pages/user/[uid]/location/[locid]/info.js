@@ -7,12 +7,8 @@ import {connect} from 'react-redux'
 import {Form} from "react-bootstrap";
 import Icon from "@mdi/react";
 import {mdiPlus} from "@mdi/js";
-import {
-    dayArrayToInternal,
-    hoursToIntervals,
-    militaryBlockToStandardInterval
-} from "../../../../../helper_functions/generalFunctions";
 import {stateAbbreviations} from "../../../../../app-constants/states";
+import {dayArrayToInternal, hoursToIntervals} from "../../../../../utils/miscFunctions";
 
 const locNameMaxLength = 40;
 const locTypeMaxLength = 15;
@@ -416,7 +412,7 @@ class CrawlrLocInfo extends React.Component{
                                             return (
                                                 <>
                                                     <div className={styles.flexRowWrap} style={{marginTop: 40}}>
-                                                        {days.map((day, index) => {
+                                                        {days.map(day => {
                                                             if (hour.days.includes(day)) { //Day active
                                                                 return (
                                                                     <div className={styles.activeDayButton}

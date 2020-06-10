@@ -109,7 +109,7 @@ const CrawlrLoc = ({locations}) => {
                                 Promotions
                             </h2>
                             <h3 className={styles.promoHeader}>Description</h3>
-                            <p className={styles.promoContent}>{loc.promotion.content}</p>
+                            <p className={styles.promoContent}>{loc.promotion.description}</p>
                             <hr/>
 
                             <h3 className={styles.promoHeader}>Duration</h3>
@@ -125,7 +125,7 @@ const CrawlrLoc = ({locations}) => {
                                 Events
                             </h2>
                             <h3 className={styles.eventHeader}>Description</h3>
-                            <p className={styles.eventContent}>{loc.event.content}</p>
+                            <p className={styles.eventContent}>{loc.event.description}</p>
                             <hr/>
 
                             <h3 className={styles.eventHeader}>Expires</h3>
@@ -155,7 +155,6 @@ const CrawlrLoc = ({locations}) => {
                                             <div className={styles.timeFrameOptionContainer}>
                                                 <div className={styles.timeFrameOption}
                                                      onClick={() => {
-                                                         console.log("Hi There!!")
                                                          setGraphTime(index);
                                                      }}>
                                                     {time}
