@@ -8,7 +8,12 @@ import Icon from "@mdi/react";
 import {mdiCircle, mdiSquare, mdiTriangle} from "@mdi/js";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import {isTodayInDates} from "../../../../../utils/miscFunctions";
+import {
+    isTodayInDates,
+    promoDatesToReadable,
+    promoDateToReadable,
+    promoDaysToReadable
+} from "../../../../../utils/miscFunctions";
 import Container from "react-bootstrap/Container";
 
 const mapStateToProps = state => {
@@ -72,7 +77,7 @@ class CrawlrPromotions extends React.Component {
                                     Not Activated
                                 </div>
                                 <div className={styles.promoLegendDescription}>
-                                    {' - This promotion is not yet activated, and will not go live until activated.'}
+                                    {" - This promotion won't go live until it's activated."}
                                 </div>
                             </div>
                             <div className={styles.labelToggle}
@@ -126,9 +131,28 @@ class CrawlrPromotions extends React.Component {
                                         <h3 className={styles.promoHeader}>
                                             Dates
                                         </h3>
-                                        <p className={styles.promoContent}>
-                                            {promo.dates}
-                                        </p>
+                                        {
+                                            promo.dates.split(':')[0] &&
+                                            <p className={styles.promoContent}>
+                                                {promoDaysToReadable(promo.dates.split(':')[0])}
+                                            </p>
+                                        }
+                                        {
+                                            promo.dates.split(':')[1] &&
+                                            <p className={styles.promoContent}>
+                                                {promoDatesToReadable(promo.dates.split(':')[1])}
+                                            </p>
+                                        }
+                                        <div
+                                            className='d-flex flex-md-row justify-content-center align-items-center mt-4'>
+                                            <p className={styles.promoInfo}>Edit Promotion</p>
+                                            {
+                                                !promo.activated &&
+                                                <p className={styles.activatePromo}>
+                                                    Activate Promotion
+                                                </p>
+                                            }
+                                        </div>
 
                                     </Container>
                                 </Col>

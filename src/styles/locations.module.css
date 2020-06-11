@@ -506,3 +506,21 @@
 .labelToggle:hover {
     color: #75bf9d;
 }
+
+.activatePromo {
+    font-weight: 600;
+    margin-left: 20px;
+    color: white;
+    background-color: #048c4f;
+    padding: 5px 15px 5px 15px;
+    border-radius: 20px;
+    transition: background-color 0.2s, padding 0.1exs;
+}
+
+.activatePromo:hover {
+    background-color: #036338;
+}
+
+.activatePromo:active {
+    padding: 4px 13px 4px 13px;
+}

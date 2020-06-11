@@ -176,3 +176,42 @@ export function isTodayInDates(dates) {
     return false;
 }
 
+const day2LongDay = {
+    Sun: 'Sunday',
+    Mon: 'Monday',
+    Tue: 'Tuesday',
+    Wed: 'Wednesday',
+    Thu: 'Thursday',
+    Fri: 'Friday',
+    Sat: 'Saturday'
+};
+
+/**
+ * Takes in a promo dates string, ie, Wed.Thu:Wed Jun 03 2020;Mon Jun 01 2020, and outputs
+ * a human readable version of if, ie Every Wednesday and Thursday, June 3, 2020; June 1, 2020
+ * */
+export function promoDaysToReadable(promoDays) {
+    let repeatDays = promoDays.split('.');
+    repeatDays.sort((a, b) => days[a] - days[b]);
+    let finalString = 'Every ';
+    if (repeatDays.length === 1) {
+        finalString += day2LongDay[repeatDays[0]];
+    } else if (repeatDays.length === 2) {
+        finalString += repeatDays.map(day => day2LongDay[day]).join(' and ');
+    } else {
+        const lastDay = day2LongDay[repeatDays.pop()];
+        finalString += repeatDays.map(day => day2LongDay[day]).join(', ') + ', and ' + lastDay;
+    }
+    return finalString;
+}
+
+export function promoDatesToReadable(promoDates)  {
+    return promoDates
+        .split(';')
+        .map(date => new Date(date)
+            .toLocaleString(
+                'default',
+                {month: 'long', day: '2-digit', year: 'numeric'}
+            )
+        ).join('; ');
+}

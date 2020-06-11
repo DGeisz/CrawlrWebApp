@@ -9,7 +9,7 @@ const initialState = {
                 activated: true,
                 title: 'My first promo',
                 description: 'Everyone who comes gets a free dino',
-                dates: 'Wed.Thu:Wed Jun 03 2020'
+                dates: 'Wed.Thu:Wed Jun 03 2020;Mon Jun 01 2020'
             },
             {
                 activated: true,
