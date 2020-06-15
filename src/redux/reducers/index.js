@@ -8,20 +8,23 @@ const initialState = {
             {
                 activated: true,
                 title: 'My first promo',
+                scanEnabled: false,
                 description: 'Everyone who comes gets a free dino',
-                dates: 'Wed.Thu:Wed Jun 03 2020;Mon Jun 01 2020'
+                dates: 'Wed.Thu:2020-06-17;2020-06-20'
             },
             {
                 activated: true,
                 title: 'My first promo',
+                scanEnabled: true,
                 description: 'Everyone who comes gets a free walrus',
-                dates: 'Thu.Fri:Wed Jun 21 2020'
+                dates: 'Thu.Fri:2020-06-13;2020-06-11'
             },
             {
                 activated: false,
                 title: 'My first promo',
+                scanEnabled: false,
                 description: 'Everyone who comes gets a free triceratops',
-                dates: ':Fri Jun 12 2020'
+                dates: ':2020-06-03'
             }
         ]
     },

@@ -211,7 +211,7 @@ export function promoDatesToReadable(promoDates)  {
         .map(date => new Date(date)
             .toLocaleString(
                 'default',
-                {month: 'long', day: '2-digit', year: 'numeric'}
+                {month: 'long', day: '2-digit', year: 'numeric', timeZone: 'UTC'}
             )
         ).join('; ');
 }

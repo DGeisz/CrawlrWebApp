@@ -1,5 +1,5 @@
 import React from "react";
-import {useRouter, withRouter} from "next/router";
+import {withRouter} from "next/router";
 import NavBar from "../../../../../components/NavBar";
 import LocationNavigation from "../../../../../components/LocationNavigation";
 import styles from "../../../../../styles/locations.module.css";
@@ -9,6 +9,7 @@ import Icon from "@mdi/react";
 import {mdiPlus} from "@mdi/js";
 import {stateAbbreviations} from "../../../../../app-constants/states";
 import {dayArrayToInternal, hoursToIntervals} from "../../../../../utils/miscFunctions";
+import {days} from "../../../../../app-constants/times";
 
 const locNameMaxLength = 40;
 const locTypeMaxLength = 15;
@@ -18,8 +19,6 @@ const locCityMaxLength = 28;
 
 
 const types = ['Bar', 'Club', 'House', 'Food', 'Coffee & Tea', 'Dessert'];
-
-const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 
 

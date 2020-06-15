@@ -319,7 +319,8 @@
 }
 
 .cancel {
-    margin-right: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
     background-color: #c9c9c9;
     padding: 5px 10px 5px 10px;
     border-radius: 10px;
@@ -335,6 +336,8 @@
 }
 
 .save {
+    margin-right: 5px;
+    margin-left: 5px;
     background-color: #4287f5;
     color: white;
     padding: 5px 10px 5px 10px;
@@ -347,6 +350,24 @@
 }
 
 .save:active {
+    padding: 4px 9px 4px 9px;
+}
+
+.delete {
+    background-color: #dc3545;
+    margin-right: 50px;
+    margin-left: 5px;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    transition: background-color 0.2s, padding 0.1s;
+}
+
+.delete:hover {
+    background-color: #b02c39;
+}
+
+.delete:active {
     padding: 4px 9px 4px 9px;
 }
 
@@ -407,6 +428,21 @@
 
 .activeDayButton:hover {
     background-color: #9e0b66;
+}
+
+.activeDayPromoButton {
+    padding: 5px 10px 5px 10px;
+    background-color: #048c4f;
+    color: white;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s;
+}
+
+.activeDayPromoButton:hover {
+    background-color: #036338;
 }
 
 .vacantDayButton {
@@ -509,18 +545,79 @@
 
 .activatePromo {
     font-weight: 600;
-    margin-left: 20px;
+    margin-left: 5px;
     color: white;
-    background-color: #048c4f;
+    background-color: green;
     padding: 5px 15px 5px 15px;
-    border-radius: 20px;
-    transition: background-color 0.2s, padding 0.1exs;
+    border-radius: 10px;
+    transition: background-color 0.2s, padding 0.1s;
 }
 
 .activatePromo:hover {
-    background-color: #036338;
+    background-color: darkgreen;
 }
 
 .activatePromo:active {
     padding: 4px 13px 4px 13px;
+}
+
+.addPromoDates {
+     display: -webkit-flex;
+     flex-direction: row;
+     align-items: center;
+     justify-content: center;
+     color: green;
+     padding: 5px 10px 5px 10px;
+     font-weight: 600;
+     width: 120px;
+     border-radius: 20px;
+     transition: color 0.2s, background-color 0.2s;
+ }
+
+.addPromoDates:hover {
+    color: darkgreen;
+    background-color: #d8e6d8;
+}
+
+.addPromoDates:active {
+    background-color: #bcccbc;
+}
+
+.deletePromoDates {
+    display: -webkit-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #dc3545;
+    padding: 5px 10px 5px 10px;
+    font-weight: 600;
+    width: 150px;
+    border-radius: 20px;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.deletePromoDates:hover {
+    background-color: #e6d8d8;
+}
+
+.deletePromoDates:active {
+    background-color: #ccbcbc;
+}
+
+.cancelPromo {
+    font-weight: 600;
+    /*display: block;*/
+    color: #dc3545;
+    /*padding: 10px;*/
+    padding: 5px 15px 5px 15px;
+    border-radius: 20px;
+    transition: background-color 0.2s;
+}
+
+.cancelPromo:hover {
+    background-color: #e6d8d8;
+}
+
+.cancelPromo:active {
+    background-color: #ccbcbc;
 }

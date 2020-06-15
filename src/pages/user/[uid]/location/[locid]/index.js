@@ -144,7 +144,8 @@ const CrawlrLoc = ({locations}) => {
                                     {timeFrameOptions.map((time, index) => {
                                         if (index === graphTime) {
                                             return (
-                                                <div className={styles.timeFrameOptionContainer}>
+                                                <div className={styles.timeFrameOptionContainer}
+                                                        key={'event' + index}>
                                                     <div className={styles.timeFrameOptionActive}>
                                                         {time}
                                                     </div>
