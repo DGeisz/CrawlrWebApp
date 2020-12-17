@@ -43,7 +43,6 @@ const LocationNavigation = ({children, locid, uid}) => {
                                   as={`/user/${uid}/location/${locid}/info`}>
                                 <a className={styles.sideOptionText}>
                                     <li className={styles.sideOption}>
-
                                         Info
                                     </li>
                                 </a>

@@ -67,7 +67,7 @@ export function hoursToIntervals(hours) {
     if (hours[1] === '') {
         return militaryBlockToStandardInterval(hours[0]);
     } else {
-        return hours.map(hour => militaryBlockToStandardInterval(hour)).join(', ');
+        return hours.map(hour => militaryBlockToStandardInterval(hour)).join(',\n ');
     }
 }
 
